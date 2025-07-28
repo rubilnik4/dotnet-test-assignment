@@ -33,12 +33,12 @@ public sealed class WeatherTools(IWeatherService weatherService, ILogger<Weather
         catch (InvalidOperationException ex)
         {
             logger.LogError(ex, "Weather API error in GetCurrentWeather");
-            return $"Could not retrieve weather data for '{city}'.";
+            return $"Could not retrieve weather data for '{city}'";
         }
         catch (Exception ex)
         {
             logger.LogError(ex, "Unexpected error in GetCurrentWeather for city: {City}", city);
-            return $"Unexpected error while fetching weather for '{city}'.";
+            return $"Unexpected error while fetching weather for '{city}'";
         }
     }
     
@@ -58,7 +58,7 @@ public sealed class WeatherTools(IWeatherService weatherService, ILogger<Weather
         {
             var forecast = await weatherService.GetWeatherForecast(city, countryCode, days);
             if (forecast.Forecast.Count == 0)
-                return $"No forecast data available for '{city}'.";
+                return $"No forecast data available for '{city}'";
 
             var formatted = forecast.Forecast
                 .Select(entry => $"{entry.Date:yyyy-MM-dd}: {entry.Main.Temperature}°C, {entry.Description[0]}");
@@ -72,7 +72,7 @@ public sealed class WeatherTools(IWeatherService weatherService, ILogger<Weather
         catch (Exception ex)
         {
             logger.LogError(ex, "Unexpected error in GetWeatherForecast: {City}", city);
-            return $"Unexpected error occurred while fetching the forecast for '{city}'.";
+            return $"Unexpected error occurred while fetching the forecast for '{city}'";
         }
     }
     

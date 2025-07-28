@@ -1,6 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using WeatherMcpServer.Services;
 using WeatherMcpServer.Settings;
 using WeatherMcpServer.Tools;
 
@@ -15,6 +16,9 @@ builder.Services
 
 builder.Logging
     .AddConsole(o => o.LogToStandardErrorThreshold = LogLevel.Debug);
+
+builder.Services
+    .AddHttpClient<IWeatherService, OpenWeatherService>();
 
 builder.Services
     .AddMcpServer()
