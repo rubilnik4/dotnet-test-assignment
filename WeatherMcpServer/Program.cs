@@ -13,12 +13,12 @@ builder.Services
     .Validate(s => !string.IsNullOrWhiteSpace(s.ApiKey), "OpenWeather API key is required")
     .ValidateOnStart();
 
-builder.Logging.AddConsole(o => o.LogToStandardErrorThreshold = LogLevel.Trace);
+builder.Logging
+    .AddConsole(o => o.LogToStandardErrorThreshold = LogLevel.Debug);
 
 builder.Services
     .AddMcpServer()
     .WithStdioServerTransport()
-    .WithTools<RandomNumberTools>()
     .WithTools<WeatherTools>();
 
 await builder.Build().RunAsync();
